@@ -27,6 +27,9 @@ namespace JonasTest.Parser
 		public void Setup()
 		{
 			files = new List<string>();
+
+			//Get csv Files
+			//Loop through found csv files to load
 			files.Add(DataFilePAth + "MERGED2016_17_PP.csv");
 			loadCount = 100;
 		}
@@ -41,24 +44,24 @@ namespace JonasTest.Parser
 				stopWatch.Start();
 				var tasks = new List<Task>();
 				await ProcessRoot();
-				//tasks.Add(ProcessAcademics());
-				//tasks.Add(ProcessAdmissions());
-				//tasks.Add(ProcessCompletion());
-				//await Task.WhenAll(tasks.ToArray());
-				//tasks = new List<Task>();
+				tasks.Add(ProcessAcademics());
+				tasks.Add(ProcessAdmissions());
+				tasks.Add(ProcessCompletion());
+				await Task.WhenAll(tasks.ToArray());
+				tasks = new List<Task>();
 				
-				//tasks.Add(ProcessCost());
-				//tasks.Add(ProcessEarnings());
-				//await Task.WhenAll(tasks.ToArray());
-				//tasks = new List<Task>();
+				tasks.Add(ProcessCost());
+				tasks.Add(ProcessEarnings());
+				await Task.WhenAll(tasks.ToArray());
+				tasks = new List<Task>();
 				
-				//tasks.Add(ProcessRepayment());
-				//tasks.Add(ProcessSchool());
-				//await Task.WhenAll(tasks.ToArray());
-				//tasks = new List<Task>();
+				tasks.Add(ProcessRepayment());
+				tasks.Add(ProcessSchool());
+				await Task.WhenAll(tasks.ToArray());
+				tasks = new List<Task>();
 				
 				tasks.Add(ProcessTitleIV());
-				//tasks.Add(ProcessStudent());
+				tasks.Add(ProcessStudent());
 				await Task.WhenAll(tasks.ToArray());
 				
 				// Get the elapsed time as a TimeSpan value.

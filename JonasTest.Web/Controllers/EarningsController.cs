@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
@@ -19,9 +20,10 @@ namespace JonasTest.Web.Controllers
 	public class EarningsController : ContextController
 	{
 		private IEarningsRepository _repository;
-		
-		public EarningsController(ScoreCardContext context, ILoggerFactory logFactory)
-			: base(context, logFactory)
+		private string baseKey = "earnings_";
+
+		public EarningsController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
+			: base(context, logFactory, memoryCache)
 		{
 			this._repository = new EarningsRepository(this._context);
 		}
@@ -30,9 +32,16 @@ namespace JonasTest.Web.Controllers
 		[HttpGet("{unitId}")]
 		public async Task<ActionResult<Core.Earnings>> Get(int unitId)
 		{
-			var Earnings = await this._repository.GetByIdAsync(unitId);
+			Core.Earnings earnings;
 
-			return Earnings;
+			earnings = GetCacheValue<Core.Earnings>(baseKey + unitId);
+			if (earnings != null) return earnings;
+
+			earnings = await this._repository.GetByIdAsync(unitId);
+
+			AddCacheValue<Core.Earnings>(baseKey + unitId, earnings);
+
+			return earnings;
 		}
 
 		// POST api/Earnings
@@ -41,6 +50,9 @@ namespace JonasTest.Web.Controllers
 		{
 			await this._repository.UpdateAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.Earnings>(baseKey + value.UNITID, value);
+
 			return Ok();
 		}
 
@@ -51,6 +63,8 @@ namespace JonasTest.Web.Controllers
 			await this._repository.DeleteAsync(value.UNITID);
 			await this._repository.AddAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.Earnings>(baseKey + value.UNITID, value);
 
 			return Ok();
 		}
@@ -64,7 +78,10 @@ namespace JonasTest.Web.Controllers
 
 			if (await _repository.GetByIdAsync(unitId) == null)
 				return Ok();
-			else return BadRequest();
+
+			RemoveCacheValue(baseKey + unitId);
+
+			return BadRequest();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace JonasTest.Core
 {
+	[Serializable]
 	public class Root
 	{
 		public Root(){

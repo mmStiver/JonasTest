@@ -16,10 +16,11 @@ namespace JonasTest.Repository
 	public class TitleIVRepository : ITitleIVRepository
 	{
 		private readonly data.ScoreCardContext _context;
-
+		private readonly Data.GateWay.TitleIVGateway _gateway;
 		public TitleIVRepository(data.ScoreCardContext dataContext)
 		{
 			_context = dataContext;
+			_gateway = new Data.GateWay.TitleIVGateway(_context.Database.GetDbConnection().ConnectionString);
 		}
 
 		public async Task<IEnumerable<core.TitleIV>> GetAllAsync()
@@ -31,7 +32,7 @@ namespace JonasTest.Repository
 		{
 			var titleIV = await QueryByIdAsync(unitid);
 			if (titleIV != null)
-				return titleIV.ToTransferObject();
+				return titleIV;
 			return null;
 		}
 		public async Task<bool> AddAsync(core.TitleIV titleIV)
@@ -40,9 +41,7 @@ namespace JonasTest.Repository
 				return false;
 
 			//Use Gateway to stored proc
-			var gateway = new Data.GateWay.TitleIVGateway(_context.Database.GetDbConnection().ConnectionString);
-
-			var result = await gateway.InsertTitleIV(titleIV.ToDataObject());
+			var result = await _gateway.InsertTitleIVAsync(titleIV.ToDataObject());
 			return result;
 
 				//EF Can't handle object size.
@@ -77,9 +76,9 @@ namespace JonasTest.Repository
 			return !_context.TitleIv.Any(r => r.Unitid == unitId);
 		}
 
-		private async Task<data.TitleIv> QueryByIdAsync(int unitid)
+		private async Task<core.TitleIV> QueryByIdAsync(int unitid)
 		{
-			return await _context.TitleIv.FindAsync(unitid);
+			return await _gateway.GetTitleIVAsync(unitid);
 		}
 		private async Task<bool> TitleIVExists(int unitid)
 		{

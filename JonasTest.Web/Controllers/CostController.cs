@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
@@ -19,9 +20,10 @@ namespace JonasTest.Web.Controllers
 	public class CostController : ContextController
 	{
 		private ICostRepository _repository;
-		
-		public CostController(ScoreCardContext context, ILoggerFactory logFactory)
-			: base(context, logFactory)
+		private string baseKey = "cost_";
+
+		public CostController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
+			: base(context, logFactory, memoryCache)
 		{
 			this._repository = new CostRepository(this._context);
 		}
@@ -30,9 +32,16 @@ namespace JonasTest.Web.Controllers
 		[HttpGet("{unitId}")]
 		public async Task<ActionResult<Core.Cost>> Get(int unitId)
 		{
-			var Cost = await this._repository.GetByIdAsync(unitId);
+			Core.Cost cost;
 
-			return Cost;
+			cost = GetCacheValue<Core.Cost>(baseKey + unitId);
+			if (cost != null) return cost;
+
+			cost = await this._repository.GetByIdAsync(unitId);
+
+			AddCacheValue<Core.Cost>(baseKey + unitId, cost);
+
+			return cost;
 		}
 
 		// POST api/Cost
@@ -41,6 +50,9 @@ namespace JonasTest.Web.Controllers
 		{
 			await this._repository.UpdateAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.Cost>(baseKey + value.UNITID, value);
+
 			return Ok();
 		}
 
@@ -51,6 +63,9 @@ namespace JonasTest.Web.Controllers
 			await this._repository.DeleteAsync(value.UNITID);
 			await this._repository.AddAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.Cost>(baseKey + value.UNITID, value);
+
 
 			return Ok();
 		}
@@ -64,7 +79,10 @@ namespace JonasTest.Web.Controllers
 
 			if (await _repository.GetByIdAsync(unitId) == null)
 				return Ok();
-			else return BadRequest();
+
+			RemoveCacheValue(baseKey + unitId);
+
+			return BadRequest();
 		}
 	}
 }

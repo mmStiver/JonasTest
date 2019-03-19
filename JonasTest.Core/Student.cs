@@ -2,6 +2,7 @@
 
 namespace JonasTest.Core
 {
+	[Serializable]
 	public class Student
 	{
 		public int UNITID { get; set; } 

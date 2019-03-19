@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
@@ -19,9 +20,10 @@ namespace JonasTest.Web.Controllers
 	public class SchoolController : ContextController
 	{
 		private ISchoolRepository _repository;
-		
-		public SchoolController(ScoreCardContext context, ILoggerFactory logFactory)
-			: base(context, logFactory)
+		private string baseKey = "school_";
+
+		public SchoolController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
+			: base(context, logFactory, memoryCache)
 		{
 			this._repository = new SchoolRepository(this._context);
 		}
@@ -30,9 +32,16 @@ namespace JonasTest.Web.Controllers
 		[HttpGet("{unitId}")]
 		public async Task<ActionResult<Core.School>> Get(int unitId)
 		{
-			var School = await this._repository.GetByIdAsync(unitId);
+			Core.School school;
 
-			return School;
+			school = GetCacheValue<Core.School>(baseKey + unitId);
+			if (school != null) return school;
+
+			school = await this._repository.GetByIdAsync(unitId);
+
+			AddCacheValue<Core.School>(baseKey + unitId, school);
+
+			return school;
 		}
 
 		// POST api/School
@@ -41,6 +50,9 @@ namespace JonasTest.Web.Controllers
 		{
 			await this._repository.UpdateAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.School>(baseKey + value.UNITID, value);
+
 			return Ok();
 		}
 
@@ -51,6 +63,8 @@ namespace JonasTest.Web.Controllers
 			await this._repository.DeleteAsync(value.UNITID);
 			await this._repository.AddAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.School>(baseKey + value.UNITID, value);
 
 			return Ok();
 		}
@@ -64,7 +78,10 @@ namespace JonasTest.Web.Controllers
 
 			if (await _repository.GetByIdAsync(unitId) == null)
 				return Ok();
-			else return BadRequest();
+
+			RemoveCacheValue(baseKey + unitId);
+
+			return BadRequest();
 		}
 	}
 }

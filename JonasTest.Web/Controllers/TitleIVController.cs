@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
@@ -19,9 +20,10 @@ namespace JonasTest.Web.Controllers
 	public class TitleIVController : ContextController
 	{
 		private ITitleIVRepository _repository;
-		
-		public TitleIVController(ScoreCardContext context, ILoggerFactory logFactory)
-			: base(context, logFactory)
+		private string baseKey = "title_";
+
+		public TitleIVController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
+			: base(context, logFactory, memoryCache)
 		{
 			this._repository = new TitleIVRepository(this._context);
 		}
@@ -30,9 +32,16 @@ namespace JonasTest.Web.Controllers
 		[HttpGet("{unitId}")]
 		public async Task<ActionResult<Core.TitleIV>> Get(int unitId)
 		{
-			var TitleIV = await this._repository.GetByIdAsync(unitId);
+			Core.TitleIV titleiv;
 
-			return TitleIV;
+			titleiv = GetCacheValue<Core.TitleIV>(baseKey + unitId);
+			if(titleiv != null) return titleiv;
+
+			titleiv = await this._repository.GetByIdAsync(unitId);
+
+			AddCacheValue<Core.TitleIV>(baseKey + unitId, titleiv);
+
+			return titleiv;
 		}
 
 		// POST api/TitleIV
@@ -41,6 +50,9 @@ namespace JonasTest.Web.Controllers
 		{
 			await this._repository.UpdateAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.TitleIV>(baseKey + value.UNITID, value);
+
 			return Ok();
 		}
 
@@ -51,6 +63,8 @@ namespace JonasTest.Web.Controllers
 			await this._repository.DeleteAsync(value.UNITID);
 			await this._repository.AddAsync(value);
 			await _context.SaveChangesAsync();
+
+			AddCacheValue<Core.TitleIV>(baseKey + value.UNITID, value);
 
 			return Ok();
 		}
@@ -64,7 +78,10 @@ namespace JonasTest.Web.Controllers
 
 			if (await _repository.GetByIdAsync(unitId) == null)
 				return Ok();
-			else return BadRequest();
+
+			RemoveCacheValue(baseKey + unitId);
+
+			return BadRequest();
 		}
 	}
 }

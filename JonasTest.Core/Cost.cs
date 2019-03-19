@@ -2,6 +2,7 @@
 
 namespace JonasTest.Core
 {
+	[Serializable]
 	public class Cost
 	{
 		public int UNITID { get; set; }

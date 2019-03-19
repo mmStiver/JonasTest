@@ -33,7 +33,10 @@ namespace JonasTest.Web
 		{
 			services.AddDbContext<ScoreCardContext>(options =>
 				options.UseSqlServer(
-					Configuration.GetConnectionString("MothConnection")));
+					Configuration.GetConnectionString("ScoreCardConnection")));
+
+			// Adds a default in-memory cache.
+			services.AddMemoryCache();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()); ;
 

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JonasTest.Data", "JonasTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JonasTest.Core", "JonasTest.Core\JonasTest.Core.csproj", "{E93A913C-FF71-4024-9E93-8EC01C59ABB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JonasTest.Repository", "JonasTest.Repository\JonasTest.Repository.csproj", "{41222587-FAF8-4635-9113-2D87B586A4C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JonasTest.Repository", "JonasTest.Repository\JonasTest.Repository.csproj", "{41222587-FAF8-4635-9113-2D87B586A4C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 using JonasTest.Data.Model;
 
@@ -17,18 +18,15 @@ namespace JonasTest.Web.Controllers
 	{
 			protected ScoreCardContext _context;
 			protected ILogger _logger;
-			//protected IRepository _userRepository;
-			//private IMemoryCache _cache;
+			private IMemoryCache _cache;
 
 
-		public ContextController(ScoreCardContext context,  ILoggerFactory logFactory)
+		public ContextController(ScoreCardContext context,  ILoggerFactory logFactory, IMemoryCache memoryCache)
 			
 			{
 				_context = context;
-				//_userFacade = new UserFacade(context);
-				//_userRepository = userRepo;
 				_logger = logFactory.CreateLogger<ContextController>();
-				//_cache = memoryCache;
+				_cache = memoryCache;
 			}
 
 			public override void OnActionExecuted(ActionExecutedContext asyncResult)
@@ -50,7 +48,33 @@ namespace JonasTest.Web.Controllers
 					}
 			}
 
-			protected void RejectChanges()
+		protected T GetCacheValue<T>(string cachekey)
+		{
+			T cacheEntry = default(T);
+			// Look for cache key.
+			if (_cache.TryGetValue<T>(cachekey, out cacheEntry))
+				return cacheEntry;
+			return  default(T);
+		}
+
+		protected void AddCacheValue<T>(string cachekey, T cacheEntry)
+		{
+			// Set cache options.
+			var cacheEntryOptions = new MemoryCacheEntryOptions()
+				// Keep in cache for this time, reset time if accessed.
+				.SetSlidingExpiration(TimeSpan.FromSeconds(30));
+
+			// Save data in cache.!
+			_cache.Set<T>(cachekey, cacheEntry);
+		}
+
+		protected void RemoveCacheValue(string cachekey)
+		{ 
+			// Save data in cache.
+			_cache.Remove(cachekey);
+		}
+
+		protected void RejectChanges()
 			{
 				foreach (var entry in _context.ChangeTracker.Entries())
 				{
@@ -68,7 +92,7 @@ namespace JonasTest.Web.Controllers
 				}
 			}
 
-			protected bool HasModifiedEntity()
+		protected bool HasModifiedEntity()
 			{
 				return _context.ChangeTracker.Entries()
 					.Any(e =>
@@ -78,7 +102,7 @@ namespace JonasTest.Web.Controllers
 
 			}
 
-			protected void SaveEntityContext()
+		protected void SaveEntityContext()
 			{
 				try
 				{

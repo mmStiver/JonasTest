@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
+using JonasTest.Core;
 using JonasTest.Data.Model;
 using JonasTest.Data.ConverterExtention;
 
@@ -24,7 +25,21 @@ namespace JonasTest.Data.GateWay
 			this._connectionString =  connectionString;
 		}
 
-		public async Task<bool> InsertTitleIV(TitleIv titleIV)
+		public async Task<Core.TitleIV> GetTitleIVAsync(int uniId )
+		{
+			Core.TitleIV result;
+
+			using (var connection = new SqlConnection(_connectionString))
+			{
+				await connection.OpenAsync();
+
+				var queryResult = await connection.QueryAsync<Core.TitleIV>("cscData.usp_GetTitleIV", new { UNITID = uniId }, commandType: CommandType.StoredProcedure);
+				result = queryResult.FirstOrDefault();
+			}
+			return result;
+		}
+
+		public async Task<bool> InsertTitleIVAsync(TitleIv titleIV)
 		{
 			bool queryResult;
 
@@ -35,12 +50,10 @@ namespace JonasTest.Data.GateWay
 
 				var parms = titleIV.ToSQLParameterList();
 
-				var result = await connection.QueryAsync<TitleIv>("cscData.usp_InsertTitleIV", parms, commandType: CommandType.StoredProcedure);
+				var result = await connection.QueryAsync("cscData.usp_InsertTitleIV", parms, commandType: CommandType.StoredProcedure);
 				queryResult = parms.Get<int>("@return") == 1;
 			}
 			return queryResult;
 		}
-
-
 	}
 }

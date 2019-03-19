@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="client.ncconf" />
+    <None Remove="config.ncconf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alachisoft.NCache.EFCore" Version="4.9.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
