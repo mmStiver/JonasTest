@@ -1,0 +1,1 @@
+﻿scaffold-DbContext "Data Source=(localdb)\v12.0;Initial Catalog=ScoreCard;Integrated Security=True;User ID=cscUser;Password=cscUser;"  Microsoft.EntityFrameworkCore.SqlServer -schemas cscData -OutputDir Model -force

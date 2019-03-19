@@ -1,0 +1,125 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace JonasTest.Data.Model
+{
+    public partial class Student
+    {
+        public int Unitid { get; set; }
+        public int? Ugds { get; set; }
+        public int? Ug { get; set; }
+        public decimal? UgdsWhite { get; set; }
+        public decimal? UgdsBlack { get; set; }
+        public decimal? UgdsHisp { get; set; }
+        public decimal? UgdsAsian { get; set; }
+        public decimal? UgdsAian { get; set; }
+        public decimal? UgdsNhpi { get; set; }
+        public decimal? Ugds2mor { get; set; }
+        public decimal? UgdsNra { get; set; }
+        public decimal? UgdsUnkn { get; set; }
+        public decimal? UgdsWhitenh { get; set; }
+        public decimal? UgdsBlacknh { get; set; }
+        public decimal? UgdsApi { get; set; }
+        public decimal? UgdsAianold { get; set; }
+        public decimal? UgdsHispold { get; set; }
+        public decimal? UgNra { get; set; }
+        public decimal? UgUnkn { get; set; }
+        public decimal? UgWhitenh { get; set; }
+        public decimal? UgBlacknh { get; set; }
+        public decimal? UgApi { get; set; }
+        public decimal? UgAianold { get; set; }
+        public decimal? UgHispold { get; set; }
+        public decimal? PptugEf { get; set; }
+        public decimal? PptugEf2 { get; set; }
+        public decimal? Pftftug1Ef { get; set; }
+        public decimal? RetFt4 { get; set; }
+        public decimal? RetFtl4 { get; set; }
+        public decimal? RetPt4 { get; set; }
+        public decimal? RetPtl4 { get; set; }
+        public decimal? Ug25abv { get; set; }
+        public decimal? IncPctLo { get; set; }
+        public decimal? DepStatPctInd { get; set; }
+        public decimal? IndIncPctLo { get; set; }
+        public decimal? DepIncPctLo { get; set; }
+        public decimal? ParEdPct1stgen { get; set; }
+        public decimal? IncPctM1 { get; set; }
+        public decimal? IncPctM2 { get; set; }
+        public decimal? IncPctH1 { get; set; }
+        public decimal? IncPctH2 { get; set; }
+        public decimal? DepIncPctM1 { get; set; }
+        public decimal? DepIncPctM2 { get; set; }
+        public decimal? DepIncPctH1 { get; set; }
+        public decimal? DepIncPctH2 { get; set; }
+        public decimal? IndIncPctM1 { get; set; }
+        public decimal? IndIncPctM2 { get; set; }
+        public decimal? IndIncPctH1 { get; set; }
+        public decimal? IndIncPctH2 { get; set; }
+        public decimal? ParEdPctMs { get; set; }
+        public decimal? ParEdPctHs { get; set; }
+        public decimal? ParEdPctPs { get; set; }
+        public decimal? ApplSchPctGe2 { get; set; }
+        public decimal? ApplSchPctGe3 { get; set; }
+        public decimal? ApplSchPctGe4 { get; set; }
+        public decimal? ApplSchPctGe5 { get; set; }
+        public decimal? DepIncAvg { get; set; }
+        public decimal? IndIncAvg { get; set; }
+        public int? IncN { get; set; }
+        public int? DepIncN { get; set; }
+        public int? IndIncN { get; set; }
+        public int? DepStatN { get; set; }
+        public int? ParEdN { get; set; }
+        public int? ApplSchN { get; set; }
+        public decimal? PellEver { get; set; }
+        public decimal? AgeEntry { get; set; }
+        public int? AgeEntrySq { get; set; }
+        public decimal? Agege24 { get; set; }
+        public decimal? Female { get; set; }
+        public decimal? Married { get; set; }
+        public decimal? Dependent { get; set; }
+        public decimal? Veteran { get; set; }
+        public decimal? FirstGen { get; set; }
+        public decimal? Faminc { get; set; }
+        public decimal? MdFaminc { get; set; }
+        public decimal? FamincInd { get; set; }
+        public int? Lnfaminc { get; set; }
+        public int? LnfamincInd { get; set; }
+        public decimal? PctWhite { get; set; }
+        public decimal? PctBlack { get; set; }
+        public decimal? PctAsian { get; set; }
+        public decimal? PctHispanic { get; set; }
+        public decimal? PctBa { get; set; }
+        public decimal? PctGradProf { get; set; }
+        public decimal? PctBornUs { get; set; }
+        public int? MedianHhInc { get; set; }
+        public decimal? PovertyRate { get; set; }
+        public decimal? UnempRate { get; set; }
+        public int? LnMedianHhInc { get; set; }
+        public int? FsendCount { get; set; }
+        public decimal? Fsend1 { get; set; }
+        public decimal? Fsend2 { get; set; }
+        public decimal? Fsend3 { get; set; }
+        public decimal? Fsend4 { get; set; }
+        public decimal? Fsend5 { get; set; }
+        public decimal? UgdsMen { get; set; }
+        public decimal? UgdsWomen { get; set; }
+        public int? DPctpellPctfloan { get; set; }
+        public int? Ugnonds { get; set; }
+        public int? Grads { get; set; }
+        public decimal? RetFt4Pooled { get; set; }
+        public decimal? RetFtl4Pooled { get; set; }
+        public decimal? RetPt4Pooled { get; set; }
+        public decimal? RetPtl4Pooled { get; set; }
+        public decimal? RetFtDen4Pooled { get; set; }
+        public decimal? RetFtDenl4Pooled { get; set; }
+        public decimal? RetPtDen4Pooled { get; set; }
+        public decimal? RetPtDenl4Pooled { get; set; }
+        public int? PoolyrsretFt { get; set; }
+        public int? PoolyrsretPt { get; set; }
+        public decimal? RetFt4PooledSupp { get; set; }
+        public decimal? RetFtl4PooledSupp { get; set; }
+        public decimal? RetPt4PooledSupp { get; set; }
+        public decimal? RetPtl4PooledSupp { get; set; }
+
+        public virtual Root Unit { get; set; }
+    }
+}

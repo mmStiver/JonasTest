@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="TinyCsvParser" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JonasTest.Core\JonasTest.Core.csproj" />
+    <ProjectReference Include="..\JonasTest.Data\JonasTest.Data.csproj" />
+    <ProjectReference Include="..\JonasTest.Parser\JonasTest.Parser.csproj" />
+    <ProjectReference Include="..\JonasTest.Web\JonasTest.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CSVTestData\MERGED2016_17_PP.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CSVTestData\MergedTest2.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CSVTestData\MergedTest.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

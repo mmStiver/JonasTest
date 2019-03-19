@@ -1,0 +1,273 @@
+﻿using System;
+
+namespace JonasTest.Core
+{
+	public class Completion
+	{
+	   public int UNITID {  get; set; }
+public decimal? C150_4 { get; set; }
+public decimal? C150_L4 { get; set; }
+public decimal? C150_4_POOLED { get; set; }
+public decimal? C150_L4_POOLED { get; set; }
+		public int? POOLYRS { get; set; }
+public int?  D150_4                                         { get; set; }
+public int? D150_L4 { get; set; }
+public int?  D150_4_POOLED                                  { get; set; }
+public int? D150_L4_POOLED { get; set; }
+public decimal? C150_4_WHITE                                   { get; set; }
+public decimal? C150_4_BLACK { get; set; }
+public decimal? C150_4_HISP { get; set; }
+public decimal? C150_4_ASIAN { get; set; }
+public decimal? C150_4_AIAN { get; set; }
+public decimal? C150_4_NHPI { get; set; }
+public decimal? C150_4_2MOR { get; set; }
+public decimal? C150_4_NRA { get; set; }
+public decimal? C150_4_UNKN { get; set; }
+public decimal? C150_4_WHITENH { get; set; }
+public decimal? C150_4_BLACKNH { get; set; }
+public decimal? C150_4_API { get; set; }
+public decimal? C150_4_AIANOLD { get; set; }
+public decimal? C150_4_HISPOLD { get; set; }
+public decimal? C150_L4_WHITE { get; set; }
+public decimal? C150_L4_BLACK { get; set; }
+public decimal? C150_L4_HISP { get; set; }
+public decimal? C150_L4_ASIAN { get; set; }
+public decimal? C150_L4_AIAN { get; set; }
+public decimal? C150_L4_NHPI { get; set; }
+public decimal? C150_L4_2MOR { get; set; }
+public decimal? C150_L4_NRA { get; set; }
+public decimal? C150_L4_UNKN { get; set; }
+public decimal? C150_L4_WHITENH { get; set; }
+public decimal? C150_L4_BLACKNH { get; set; }
+public decimal? C150_L4_API { get; set; }
+public decimal? C150_L4_AIANOLD { get; set; }
+public decimal? C150_L4_HISPOLD { get; set; }
+public decimal? C200_4 { get; set; }
+public decimal? C200_L4 { get; set; }
+public decimal? D200_4 { get; set; }
+public decimal? D200_L4 { get; set; }
+public decimal? C200_4_POOLED { get; set; }
+public decimal? C200_L4_POOLED { get; set; }
+public int? POOLYRS200 { get; set; }
+public decimal?  D200_4_POOLED                                  { get; set; }
+public decimal? D200_L4_POOLED { get; set; }
+	public int? OVERALL_YR2_N { get; set; }
+public int?  LO_INC_YR2_N                                   { get; set; }
+public int? MD_INC_YR2_N { get; set; }
+public int?  HI_INC_YR2_N                                   { get; set; }
+public int? DEP_YR2_N { get; set; }
+public int?  IND_YR2_N                                      { get; set; }
+public int? FEMALE_YR2_N { get; set; }
+public int?  MALE_YR2_N                                     { get; set; }
+public int? PELL_YR2_N { get; set; }
+public int?  NOPELL_YR2_N                                   { get; set; }
+public int? LOAN_YR2_N { get; set; }
+public int?  NOLOAN_YR2_N                                   { get; set; }
+public int? FIRSTGEN_YR2_N { get; set; }
+public int?  NOT1STGEN_YR2_N                                    { get; set; }
+public int? OVERALL_YR3_N { get; set; }
+public int?  LO_INC_YR3_N                                   { get; set; }
+public int? MD_INC_YR3_N { get; set; }
+public int?  HI_INC_YR3_N                                   { get; set; }
+public int? DEP_YR3_N { get; set; }
+public int?  IND_YR3_N                                      { get; set; }
+public int? FEMALE_YR3_N { get; set; }
+public int?  MALE_YR3_N                                     { get; set; }
+public int? PELL_YR3_N { get; set; }
+public int?  NOPELL_YR3_N                                   { get; set; }
+public int? LOAN_YR3_N { get; set; }
+public int?  NOLOAN_YR3_N                                   { get; set; }
+public int? FIRSTGEN_YR3_N { get; set; }
+public int?  NOT1STGEN_YR3_N                                    { get; set; }
+public int? OVERALL_YR4_N { get; set; }
+public int?  LO_INC_YR4_N                                   { get; set; }
+public int? MD_INC_YR4_N { get; set; }
+public int?  HI_INC_YR4_N                                   { get; set; }
+public int? DEP_YR4_N { get; set; }
+public int?  IND_YR4_N                                      { get; set; }
+public int? FEMALE_YR4_N { get; set; }
+public int?  MALE_YR4_N                                     { get; set; }
+public int? PELL_YR4_N { get; set; }
+public int?  NOPELL_YR4_N                                   { get; set; }
+public int? LOAN_YR4_N { get; set; }
+public int?  NOLOAN_YR4_N                                   { get; set; }
+public int? FIRSTGEN_YR4_N { get; set; }
+public int?  NOT1STGEN_YR4_N                                    { get; set; }
+public int? OVERALL_YR6_N { get; set; }
+public int?  LO_INC_YR6_N                                   { get; set; }
+public int? MD_INC_YR6_N { get; set; }
+public int?  HI_INC_YR6_N                                   { get; set; }
+public int? DEP_YR6_N { get; set; }
+public int?  IND_YR6_N                                      { get; set; }
+public int? FEMALE_YR6_N { get; set; }
+public int?  MALE_YR6_N                                     { get; set; }
+public int? PELL_YR6_N { get; set; }
+public int?  NOPELL_YR6_N                                   { get; set; }
+public int? LOAN_YR6_N { get; set; }
+public int?  NOLOAN_YR6_N                                   { get; set; }
+public int? FIRSTGEN_YR6_N { get; set; }
+public int?  NOT1STGEN_YR6_N                                    { get; set; }
+public int? OVERALL_YR8_N { get; set; }
+public int?  LO_INC_YR8_N                                   { get; set; }
+public int? MD_INC_YR8_N { get; set; }
+public int?  HI_INC_YR8_N                                   { get; set; }
+public int? DEP_YR8_N { get; set; }
+public int?  IND_YR8_N                                      { get; set; }
+public int? FEMALE_YR8_N { get; set; }
+public int?  MALE_YR8_N                                     { get; set; }
+public int? PELL_YR8_N { get; set; }
+public int?  NOPELL_YR8_N                                   { get; set; }
+public int? LOAN_YR8_N { get; set; }
+public int?  NOLOAN_YR8_N                                   { get; set; }
+public int? FIRSTGEN_YR8_N { get; set; }
+public int?  NOT1STGEN_YR8_N                                    { get; set; }
+public string SEPAR_DT_MDN { get; set; }
+		public int? SEPAR_DT_N { get; set; }
+public decimal?  C150_L4_POOLED_SUPP                                { get; set; }
+public decimal? C150_4_POOLED_SUPP { get; set; }
+public decimal? C200_L4_POOLED_SUPP { get; set; }
+public decimal? C200_4_POOLED_SUPP { get; set; }
+public decimal? C100_4 { get; set; }
+	public int? D100_4 { get; set; }
+ public decimal? C100_L4                                            { get; set; }
+	public int? D100_L4 { get; set; }
+ public decimal? TRANS_4                                            { get; set; }
+	public int? DTRANS_4 { get; set; }
+ public decimal? TRANS_L4                                       { get; set; }
+	public int? DTRANS_L4 { get; set; }
+public int?  D150_4_WHITE                                   { get; set; }
+public int? D150_4_BLACK { get; set; }
+public int?  D150_4_HISP                                        { get; set; }
+public int? D150_4_ASIAN { get; set; }
+public int?  D150_4_AIAN                                        { get; set; }
+public int? D150_4_NHPI { get; set; }
+public int?  D150_4_2MOR                                        { get; set; }
+public int? D150_4_NRA { get; set; }
+public int?  D150_4_UNKN                                        { get; set; }
+public int? D150_L4_WHITE { get; set; }
+public int?  D150_L4_BLACK                                  { get; set; }
+public int? D150_L4_HISP { get; set; }
+public int?  D150_L4_ASIAN                                  { get; set; }
+public int? D150_L4_AIAN { get; set; }
+public int?  D150_L4_NHPI                                   { get; set; }
+public int? D150_L4_2MOR { get; set; }
+public int?  D150_L4_NRA                                        { get; set; }
+public int? D150_L4_UNKN { get; set; }
+public int?  D150_4_WHITENH                                 { get; set; }
+public int? D150_4_BLACKNH { get; set; }
+public int?  D150_4_API                                     { get; set; }
+public int? D150_4_AIANOld { get; set; }
+public int?  D150_4_HISPOld                                 { get; set; }
+public int? D150_L4_WHITENH { get; set; }
+public int?  D150_L4_BLACKNH                                    { get; set; }
+public int? D150_L4_API { get; set; }
+public int? D150_L4_HISPOld { get; set; }
+public int?  D150_L4_AIANOld                                    { get; set; }
+ public int? OMACHT6_FTFT                                   { get; set; }
+public decimal? OMAWDP6_FTFT { get; set; }
+	public int? OMACHT8_FTFT { get; set; }
+public decimal?  OMAWDP8_FTFT                                   { get; set; }
+public decimal? OMENRYP8_FTFT { get; set; }
+public decimal? OMENRAP8_FTFT { get; set; }
+public decimal? OMENRUP8_FTFT { get; set; }
+	public int? OMACHT6_PTFT { get; set; }
+ public decimal? OMAWDP6_PTFT                                   { get; set; }
+	public int? OMACHT8_PTFT { get; set; }
+ public decimal? OMAWDP8_PTFT                                   { get; set; }
+public decimal? OMENRYP8_PTFT { get; set; }
+public decimal? OMENRAP8_PTFT { get; set; }
+public decimal? OMENRUP8_PTFT { get; set; }
+	public int? OMACHT6_FTNFT { get; set; }
+ public decimal? OMAWDP6_FTNFT                                  { get; set; }
+	public int? OMACHT8_FTNFT { get; set; }
+ public decimal? OMAWDP8_FTNFT                                  { get; set; }
+public decimal? OMENRYP8_FTNFT { get; set; }
+public decimal? OMENRAP8_FTNFT { get; set; }
+public decimal? OMENRUP8_FTNFT { get; set; }
+	public int? OMACHT6_PTNFT { get; set; }
+ public decimal? OMAWDP6_PTNFT                                  { get; set; }
+	public int? OMACHT8_PTNFT { get; set; }
+ public decimal? OMAWDP8_PTNFT                                  { get; set; }
+public decimal? OMENRYP8_PTNFT { get; set; }
+public decimal? OMENRAP8_PTNFT { get; set; }
+public decimal? OMENRUP8_PTNFT { get; set; }
+public decimal? TRANS_4_POOLED { get; set; }
+public decimal? TRANS_L4_POOLED { get; set; }
+	public int? DTRANS_4_POOLED { get; set; }
+public int?  DTRANS_L4_POOLED                               { get; set; }
+public decimal? TRANS_4_POOLED_SUPP { get; set; }
+public decimal? TRANS_L4_POOLED_SUPP { get; set; }
+public decimal? C100_4_POOLED { get; set; }
+public decimal? C100_L4_POOLED { get; set; }
+public int? D100_4_POOLED { get; set; }
+public int?  D100_L4_POOLED                                 { get; set; }
+public int? POOLYRS100 { get; set; }
+public decimal?  C100_4_POOLED_SUPP                             { get; set; }
+public decimal? C100_L4_POOLED_SUPP { get; set; }
+public decimal? C150_4_PELL { get; set; }
+	public int? D150_4_PELL { get; set; }
+public decimal? C150_L4_PELL                                   { get; set; }
+	public int? D150_L4_PELL { get; set; }
+ public decimal? C150_4_LOANNOPELL                              { get; set; }
+	public int? D150_4_LOANNOPELL { get; set; }
+ public decimal? C150_L4_LOANNOPELL                             { get; set; }
+	public int? D150_L4_LOANNOPELL { get; set; }
+ public decimal? C150_4_NOLOANNOPELL                                { get; set; }
+	public int? D150_4_NOLOANNOPELL { get; set; }
+ public decimal? C150_L4_NOLOANNOPELL                           { get; set; }
+	public int? D150_L4_NOLOANNOPELL { get; set; }
+ public int? OMACHT6_FTFT_POOLED                                { get; set; }
+public decimal? OMAWDP6_FTFT_POOLED { get; set; }
+	public int? OMACHT8_FTFT_POOLED { get; set; }
+public decimal?  OMAWDP8_FTFT_POOLED                                { get; set; }
+public decimal? OMENRYP8_FTFT_POOLED { get; set; }
+public decimal? OMENRAP8_FTFT_POOLED { get; set; }
+public decimal? OMENRUP8_FTFT_POOLED { get; set; }
+	public int? OMACHT6_PTFT_POOLED { get; set; }
+ public decimal? OMAWDP6_PTFT_POOLED                                { get; set; }
+	public int? OMACHT8_PTFT_POOLED { get; set; }
+ public decimal? OMAWDP8_PTFT_POOLED                                { get; set; }
+public decimal? OMENRYP8_PTFT_POOLED { get; set; }
+public decimal? OMENRAP8_PTFT_POOLED { get; set; }
+public decimal? OMENRUP8_PTFT_POOLED { get; set; }
+	public int? OMACHT6_FTNFT_POOLED { get; set; }
+ public decimal? OMAWDP6_FTNFT_POOLED                           { get; set; }
+	public int? OMACHT8_FTNFT_POOLED { get; set; }
+ public decimal? OMAWDP8_FTNFT_POOLED                           { get; set; }
+public decimal? OMENRYP8_FTNFT_POOLED { get; set; }
+public decimal? OMENRAP8_FTNFT_POOLED { get; set; }
+public decimal? OMENRUP8_FTNFT_POOLED { get; set; }
+	public int? OMACHT6_PTNFT_POOLED { get; set; }
+ public decimal? OMAWDP6_PTNFT_POOLED                           { get; set; }
+	public int? OMACHT8_PTNFT_POOLED { get; set; }
+ public decimal? OMAWDP8_PTNFT_POOLED                           { get; set; }
+public decimal? OMENRYP8_PTNFT_POOLED { get; set; }
+public decimal? OMENRAP8_PTNFT_POOLED { get; set; }
+public decimal? OMENRUP8_PTNFT_POOLED { get; set; }
+public int? poolyrsOM_FTFT { get; set; }
+public int? poolyrsOM_PTFT                                 { get; set; }
+public int? poolyrsOM_FTNFT { get; set; }
+public int? poolyrsOM_PTNFT                                    { get; set; }
+		public decimal? OMAWDP6_FTFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP8_FTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRYP8_FTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRAP8_FTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRUP8_FTFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP6_PTFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP8_PTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRYP8_PTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRAP8_PTFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRUP8_PTFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP6_FTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP8_FTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRYP8_FTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRAP8_FTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRUP8_FTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP6_PTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMAWDP8_PTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRYP8_PTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRAP8_PTNFT_POOLED_SUPP { get; set; }
+		public decimal? OMENRUP8_PTNFT_POOLED_SUPP { get; set; }
+
+	}
+}
