@@ -66,7 +66,7 @@ namespace JonasTest.Repository
 			_context.Root.Remove(toRemove);
 			return !_context.Root.Any(r => r.Unitid == unitId);
 		}
-		public async Task<core.Root> GetByOpeidAsync(int opeid )
+		public async Task<core.Root> GetByOpeidAsync(string opeid )
 		{
 			var root = await _context.Root.Where(a => a.Opeid == opeid).FirstAsync();
 			return root.ToTransferObject();

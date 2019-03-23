@@ -30,6 +30,23 @@ namespace JonasTest.Web.Controllers
 
 		// GET api/root/5
 		[HttpGet("{unitId}")]
+		public async Task<ActionResult<Core.Root>> Get(int unitId, int take, int skip)
+		{
+			Core.Root root;
+
+			root = GetCacheValue<Core.Root>(baseKey + unitId);
+			if (root != null) return root;
+
+			root = await this._repository.GetByIdAsync(unitId);
+
+			AddCacheValue<Core.Root>(baseKey + unitId, root);
+
+			return root;
+		}
+
+
+		// GET api/root/5
+		[HttpGet("{unitId}")]
 		public async Task<ActionResult<Core.Root>> Get(int unitId)
 		{
 			Core.Root root;

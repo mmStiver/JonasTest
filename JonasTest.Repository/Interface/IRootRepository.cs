@@ -13,7 +13,7 @@ namespace JonasTest.Repository.Interface
 		Task<bool> AddAsync(core.Root root);
 		Task<bool> UpdateAsync(core.Root root);
 		Task<bool> DeleteAsync(int unitId);
-		Task<core.Root> GetByOpeidAsync(int opeid);
+		Task<core.Root> GetByOpeidAsync(string opeid);
 		Task<core.Root> GetByRootByOpeid6Async(int opeid6);
 	}
 }

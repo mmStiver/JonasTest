@@ -45,6 +45,8 @@ namespace JonasTest.Repository
 		public async Task<bool> AddRange(List<core.Academics> Academicss)
 		{
 			var AcademicsRange = Academicss.Where(r =>! _context.Academics.Any(x => x.Unitid == r.UNITID)).AsParallel().Select(r => r.ToDataObject());
+			var li = AcademicsRange.Select(ar => ar.Unitid);
+			var li2 = AcademicsRange.GroupBy(ar => ar.Unitid).Where( ar => ar.Count() > 1).ToList();
 			await _context.Academics.AddRangeAsync(AcademicsRange);
 			return _context.ChangeTracker.HasChanges();
 		}

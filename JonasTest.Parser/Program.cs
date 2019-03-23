@@ -30,7 +30,9 @@ namespace JonasTest.Parser
 
 			//Get csv Files
 			//Loop through found csv files to load
-			files.Add(DataFilePAth + "MERGED2016_17_PP.csv");
+			string[] filePaths = Directory.GetFiles(DataFilePAth);
+			files = filePaths.ToList();
+			//files.Add(DataFilePAth + "MERGED2016_17_PP.csv");
 			loadCount = 100;
 		}
 
@@ -74,12 +76,17 @@ namespace JonasTest.Parser
 		public async Task ProcessRoot()
 		{
 			var roots = manager.ParseRoot()
-				.Where(csv => csv.IsValid) //filter out valid rows ToDo:we can handle exceptions at a later date;
-				.Select(csv => csv.Result)
+				//.Where(csv => csv.IsValid) //filter out valid rows ToDo:we can handle exceptions at a later date;
+				//.Select(csv => csv.Result)
 				.ToList();
 
+			var root1s = roots.Where(csv => csv.IsValid) //filter out valid rows ToDo:we can handle exceptions at a later date;
+						 .Select(csv => csv.Result);
+
+			var errs = roots.Where(csv => !csv.IsValid).ToList();
+
 			var bulkProcess = new BulkOperationCoordinator();
-			foreach(var chunk in roots.Batch(loadCount)) { 
+			foreach(var chunk in root1s.Batch(loadCount)) { 
 				await bulkProcess.ProcessRoot(chunk.ToList());
 			}
 		}
@@ -92,7 +99,17 @@ namespace JonasTest.Parser
 			var bulkProcess = new BulkOperationCoordinator();
 			foreach (var chunk in Academics.Batch(loadCount))
 			{
-				await bulkProcess.ProcessAcademics(chunk.ToList());
+				try { 
+					await bulkProcess.ProcessAcademics(chunk.ToList());
+				} catch (Exception ex) {
+					//lOG ERROR 
+
+					//log skipped rows
+					var l1asdf = chunk.ToList();
+					var ed = l1asdf;
+					//throw;
+					//Keep processing
+				}
 			}
 		}
 		public async Task ProcessAdmissions()
@@ -164,7 +181,30 @@ namespace JonasTest.Parser
 			var bulkProcess = new BulkOperationCoordinator();
 			foreach (var chunk in schools.Batch(loadCount))
 			{
-				await bulkProcess.ProcessSchool(chunk.ToList());
+				try { 
+					await bulkProcess.ProcessSchool(chunk.ToList());
+				}
+				catch (Exception ex)
+				{
+					//lOG ERROR 
+
+					//log skipped rows
+					var l1asdf = chunk.Where(s => 
+							s.INSTNM.Count() >= 100
+						|| s.CITY.Count() >= 20
+						|| s.STABBR.Count() >= 20
+						|| s.ZIP.Count() >= 20
+						|| s.ACCREDAGENCY.Count() >= 20
+						|| s.INSTURL.Count() >= 20
+						|| s.NPCURL.Count() >= 20
+						|| s.ALIAS.Count() >= 20
+						|| s.ACCREDCODE.Count() >= 20
+						|| s.T4APPROVALDATE.Count() >= 20)
+						.ToList();
+					var ed = l1asdf;
+					//throw;
+					//Keep processing
+				}
 			}
 		}
 		public async Task ProcessTitleIV()
@@ -198,12 +238,12 @@ namespace JonasTest.Parser
 			var pgm = new Program();
 			try { 
 			pgm.Setup();
+			
+			await pgm.Run();
 			}catch(Exception ex)
 			{
 			err = ex.Message	;
 			}
-			await pgm.Run();
-			
 		}
 	}
 }

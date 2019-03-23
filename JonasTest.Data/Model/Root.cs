@@ -6,7 +6,7 @@ namespace JonasTest.Data.Model
     public partial class Root
     {
         public int Unitid { get; set; }
-        public int Opeid { get; set; }
+        public string Opeid { get; set; }
         public int Opeid6 { get; set; }
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }

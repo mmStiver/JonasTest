@@ -20,4 +20,19 @@
     <ProjectReference Include="..\JonasTest.Repository\JonasTest.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\MERGED1996_97_PP.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\MERGED1999_00_PP.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\MERGED2003_04_PP.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\MERGED2006_07_PP.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
