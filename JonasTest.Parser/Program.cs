@@ -105,8 +105,6 @@ namespace JonasTest.Parser
 					//lOG ERROR 
 
 					//log skipped rows
-					var l1asdf = chunk.ToList();
-					var ed = l1asdf;
 					//throw;
 					//Keep processing
 				}
@@ -189,19 +187,7 @@ namespace JonasTest.Parser
 					//lOG ERROR 
 
 					//log skipped rows
-					var l1asdf = chunk.Where(s => 
-							s.INSTNM.Count() >= 100
-						|| s.CITY.Count() >= 20
-						|| s.STABBR.Count() >= 20
-						|| s.ZIP.Count() >= 20
-						|| s.ACCREDAGENCY.Count() >= 20
-						|| s.INSTURL.Count() >= 20
-						|| s.NPCURL.Count() >= 20
-						|| s.ALIAS.Count() >= 20
-						|| s.ACCREDCODE.Count() >= 20
-						|| s.T4APPROVALDATE.Count() >= 20)
-						.ToList();
-					var ed = l1asdf;
+					
 					//throw;
 					//Keep processing
 				}
@@ -242,7 +228,9 @@ namespace JonasTest.Parser
 			await pgm.Run();
 			}catch(Exception ex)
 			{
+			//log errors
 			err = ex.Message	;
+			throw;
 			}
 		}
 	}
