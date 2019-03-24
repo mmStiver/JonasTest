@@ -8,10 +8,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
 using JonasTest.Repository.Interface;
+using JonasTest.Web.Config;
 
 namespace JonasTest.Web.Controllers
 {
@@ -22,8 +24,8 @@ namespace JonasTest.Web.Controllers
 		private ITitleIVRepository _repository;
 		private string baseKey = "title_";
 
-		public TitleIVController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
-			: base(context, logFactory, memoryCache)
+		public TitleIVController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache, IOptions<ApiSettings> options)
+			: base(context, logFactory, memoryCache, options)
 		{
 			this._repository = new TitleIVRepository(this._context);
 		}

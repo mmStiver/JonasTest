@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using data = JonasTest.Data.Model;
 using core = JonasTest.Core;
+using JonasTest.Data.GateWay;
+using JonasTest.Data.GateWay.Interface;
 using JonasTest.Repository.ConverterExtention;
 using JonasTest.Repository.Interface;
 
@@ -21,6 +23,12 @@ namespace JonasTest.Repository
 		{
 			_context = dataContext;
 			_gateway = new Data.GateWay.TitleIVGateway(_context.Database.GetDbConnection().ConnectionString);
+		}
+
+		public TitleIVRepository(data.ScoreCardContext dataContext, TitleIVGateway gateway)
+		{
+			_context = dataContext;
+			_gateway = gateway;
 		}
 
 		public async Task<IEnumerable<core.TitleIV>> GetAllAsync()

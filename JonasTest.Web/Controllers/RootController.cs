@@ -8,10 +8,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
 using JonasTest.Repository.Interface;
+using JonasTest.Web.Config;
+using JonasTest.Web.ApiModel;
 
 namespace JonasTest.Web.Controllers
 {
@@ -22,32 +26,42 @@ namespace JonasTest.Web.Controllers
 		private IRootRepository _repository;
 		private string baseKey = "root_";
 
-		public RootController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
-			: base(context, logFactory, memoryCache)
+		public RootController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache, IOptions<ApiSettings> options)
+			: base(context, logFactory, memoryCache, options)
 		{
 			this._repository = new RootRepository(this._context);
 		}
 
-		// GET api/root/5
-		[HttpGet("{unitId}")]
-		public async Task<ActionResult<Core.Root>> Get(int unitId, int take, int skip)
+		// GET api/root/
+		[HttpGet("")]
+		public async Task<ActionResult<List<RootApiModel>>> Get([FromQuery(Name = "take")]int take = 10, [FromQuery(Name = "page")] int skip = 0)
 		{
-			Core.Root root;
+			List<RootApiModel> roots =null;
+			
+			if(take > MaxResultTake)
+				return BadRequest();
+			
+			roots = GetCacheValue< List<RootApiModel>>(baseKey + take.ToString() + "_" + skip.ToString());
+			if(roots != null) 
+				return roots;
 
-			root = GetCacheValue<Core.Root>(baseKey + unitId);
-			if (root != null) return root;
 
-			root = await this._repository.GetByIdAsync(unitId);
-
-			AddCacheValue<Core.Root>(baseKey + unitId, root);
-
-			return root;
+			var troots = await this._repository.GetAllAsync(take, skip );
+			roots = troots.Select( r => new RootApiModel() { 
+				UNITID = r.UNITID,
+				OPEID = r.OPEID,
+				OPEID6 = r.OPEID6,
+				LATITUDE = r.LATITUDE,
+				LONGITUDE = r.LONGITUDE			
+			}).ToList();
+			AddCacheValue<List<RootApiModel>>(baseKey + take.ToString() + "_" + skip.ToString(), roots);
+		
+			return roots;
 		}
 
-
 		// GET api/root/5
 		[HttpGet("{unitId}")]
-		public async Task<ActionResult<Core.Root>> Get(int unitId)
+		public async Task<ActionResult<Core.Root>> Get(int unitId, [FromQuery(Name = "take")]int take, [FromQuery(Name = "page")] int page)
 		{
 			Core.Root root;
 
@@ -55,7 +69,6 @@ namespace JonasTest.Web.Controllers
 			if (root != null) return root;
 
 			root = await this._repository.GetByIdAsync(unitId);
-
 			AddCacheValue<Core.Root>(baseKey + unitId, root);
 
 			return root;

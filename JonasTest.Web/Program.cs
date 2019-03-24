@@ -19,6 +19,10 @@ namespace JonasTest.Web
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.ConfigureAppConfiguration((hostingContext, config) =>
+				{
+					 config.AddJsonFile("ApiSettings.json", optional: false, reloadOnChange: false);
+				})
 				.UseStartup<Startup>();
 	}
 }

@@ -15,7 +15,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+
 using JonasTest.Data.Model;
+using JonasTest.Web.Config;
 
 namespace JonasTest.Web
 {
@@ -35,9 +37,12 @@ namespace JonasTest.Web
 				options.UseSqlServer(
 					Configuration.GetConnectionString("ScoreCardConnection")));
 
+
+			services.AddAPISettingsService(this.Configuration);
+
 			// Adds a default in-memory cache.
 			services.AddMemoryCache();
-
+			
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()); ;
 
 

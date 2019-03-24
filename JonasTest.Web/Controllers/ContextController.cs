@@ -8,8 +8,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 using JonasTest.Data.Model;
+using JonasTest.Web.Config;
 
 namespace JonasTest.Web.Controllers
 {
@@ -18,15 +20,17 @@ namespace JonasTest.Web.Controllers
 	{
 			protected ScoreCardContext _context;
 			protected ILogger _logger;
+			protected int MaxResultTake;
 			private IMemoryCache _cache;
+		
 
-
-		public ContextController(ScoreCardContext context,  ILoggerFactory logFactory, IMemoryCache memoryCache)
+		public ContextController(ScoreCardContext context,  ILoggerFactory logFactory, IMemoryCache memoryCache, IOptions<ApiSettings> options)
 			
 			{
 				_context = context;
 				_logger = logFactory.CreateLogger<ContextController>();
 				_cache = memoryCache;
+				MaxResultTake  = options.Value.MaxTake;
 			}
 
 			public override void OnActionExecuted(ActionExecutedContext asyncResult)

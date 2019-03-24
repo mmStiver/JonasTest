@@ -8,10 +8,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 using JonasTest.Data.Model;
 using JonasTest.Repository;
 using JonasTest.Repository.Interface;
+using JonasTest.Web.Config;
 
 namespace JonasTest.Web.Controllers
 {
@@ -22,8 +24,8 @@ namespace JonasTest.Web.Controllers
 		private IRepaymentRepository _repository;
 		private string baseKey = "repayment_";
 
-		public RepaymentController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache)
-			: base(context, logFactory, memoryCache)
+		public RepaymentController(ScoreCardContext context, ILoggerFactory logFactory, IMemoryCache memoryCache, IOptions<ApiSettings> options)
+			: base(context, logFactory, memoryCache, options)
 		{
 			this._repository = new RepaymentRepository(this._context);
 		}

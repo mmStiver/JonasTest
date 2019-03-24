@@ -22,9 +22,9 @@ namespace JonasTest.Repository
 			_context = dataContext;
 		}
 
-		public async Task<IEnumerable<core.Root>> GetAllAsync()
+		public async Task<IEnumerable<core.Root>> GetAllAsync(int take, int skip)
 		{
-			var root = await _context.Root.ToListAsync();
+			var root = await _context.Root.Take( take ).Skip( skip ).ToListAsync();
 			return root.Select(r => r.ToTransferObject());
 		}
 		public async Task<core.Root> GetByIdAsync(int unitid)
